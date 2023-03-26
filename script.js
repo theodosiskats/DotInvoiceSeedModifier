@@ -6,13 +6,15 @@ const data = fs.readFileSync('generated.json');
 // Parse the JSON data
 const customers = JSON.parse(data);
 
-// Prefix the taxId with the country code
+// Iterate over each customer object
 customers.forEach(customer => {
-  customer.TaxId = customer.Country + customer.TaxId;
-});
+  // Convert zip to string
+  customer.Zip = customer.Zip.toString();
 
-// Update the country name based on the country code
-customers.forEach(customer => {
+  // Prefix the taxId with the country code
+  customer.TaxId = customer.Country + customer.TaxId;
+
+  // Update the country name based on the country code
   switch (customer.Country) {
     case 'DE':
       customer.Country = 'Germany';
